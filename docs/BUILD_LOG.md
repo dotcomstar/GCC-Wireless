@@ -28,3 +28,6 @@ Newest entries at the bottom. Times are US Eastern.
 
 ## 2026-10-09 — Session 2: docs focus
 User is not ready to build on a board; focus moved to repo setup and research docs. Read all of `gcwireless` src and `gcwireless_bridge` src; wrote `docs/facts/*`, README, STATUS, PROVENANCE, DECISIONS, FAQ. Main finding: upstream is a prototype (TX never sends in loop, RX spoofs data, bridge copies one byte). See STATUS.
+
+## 2026-10-09 — Session 2 (cont.): PhobGCC docs
+Added PhobGCC-doc and PhobGCCv2-HW as submodules. Learned: Phob 2 has its own on-board RP2040 (no Pico needed), parts come from a donor GCC, schematic shows 3.3 V regulators and spare GPIO12-15 labels. Rail/pad details still unverified. See facts/phobgcc.md.

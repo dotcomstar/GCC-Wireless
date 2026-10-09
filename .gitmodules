@@ -10,3 +10,9 @@
 [submodule "upstream/PhobGCC-SW"]
 	path = upstream/PhobGCC-SW
 	url = https://github.com/PhobGCC/PhobGCC-SW
+[submodule "upstream/PhobGCC-doc"]
+	path = upstream/PhobGCC-doc
+	url = https://github.com/PhobGCC/PhobGCC-doc
+[submodule "upstream/PhobGCCv2-HW"]
+	path = upstream/PhobGCCv2-HW
+	url = https://github.com/PhobGCC/PhobGCCv2-HW

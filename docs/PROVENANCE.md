@@ -10,3 +10,7 @@ All pinned as git submodules under `upstream/`. All are GPL-3.0 (LICENSE files a
 | upstream/PhobGCC-SW | https://github.com/PhobGCC/PhobGCC-SW | b4f175e (2025-11-15) | controller firmware |
 
 Notes: `gcwireless/.gitmodules` still lists pico-rectangle and PhobGCC-SW although its commit bd570f2 removed them; we add PhobGCC-SW ourselves. `build-support/boards/nicenano.json` is our own stand-in board file (derived from PlatformIO's Adafruit Feather nRF52840 definition).
+
+Added 2026-10-09 (docs reading):
+| upstream/PhobGCC-doc | https://github.com/PhobGCC/PhobGCC-doc | 23e9192 (2026-08-14) | Phob build/user documentation |
+| upstream/PhobGCCv2-HW | https://github.com/PhobGCC/PhobGCCv2-HW | ff645aa (2023-04-17) | Phob 2.0 KiCad hardware, CERN-OHL-S v2 |
