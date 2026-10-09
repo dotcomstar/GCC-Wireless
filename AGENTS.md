@@ -8,3 +8,4 @@ Wireless GameCube controller project. Learner-driven; the documentation is the p
 - Machine: Windows 11, Git Bash (no WSL). PlatformIO and Pico toolchain not installed as of 2026-10-09.
 - All docs are Markdown in-repo. Define every acronym once; write verified facts, not recollections.
 - Agents (planner, worker, evaluator) run from https://github.com/Gidntsquia/claude-config/releases/tag/v1.0.0.
+- Give every clock time in docs and logs in US Eastern time, never UTC (convert first).
