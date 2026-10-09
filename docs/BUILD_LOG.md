@@ -18,3 +18,10 @@ Newest entries at the bottom. Times are US Eastern.
 5. **Failure:** `pio run` in gcwireless -> `UnknownBoard: Unknown board ID 'nicenano'`.
    Cause: platform nordicnrf52 11.0.0 ships no `nicenano` board file. Upstream's author presumably had one locally (unverified).
    Workaround: `build-support/boards/nicenano.json`, copied from the Adafruit Feather nRF52840 definition, used via `PLATFORMIO_BOARDS_DIR`. **It is a stand-in:** it proves the code compiles, but pin numbers may not match a real nice!nano. Verify before wiring.
+
+## 2026-10-09 — Session 1 (cont.): second failure, nRF52 build still blocked
+
+6. Ran `pio run` with the stand-in board. Both envs fail: `'PIN_017' was not declared` (also PIN_020/022/024/031 in `src/tx.cpp`, `src/rx.cpp`).
+   Cause: `PIN_0xx` names are not defined by the Adafruit nRF52 core (checked variants list: feather, itsybitsy, metro, pca10056, etc.; none define them). They must come from a nice!nano-specific variant that upstream's author had locally. I could not find it (one web search, GitHub variants listing).
+   Status: **TX and RX firmware do not yet build.** Next options: (a) find the nice!nano variant (ask Heather via a GitHub issue on gcwireless), (b) translate PIN_0xx to the P0.xx/P1.xx GPIO numbers via the nRF52840 pin map and add a small header. Option (b) needs the stand-in board's pin map checked; not done.
+   Not yet attempted: bridge (`gcwireless_bridge`) build.
