@@ -31,3 +31,6 @@ User is not ready to build on a board; focus moved to repo setup and research do
 
 ## 2026-10-09 — Session 2 (cont.): PhobGCC docs
 Added PhobGCC-doc and PhobGCCv2-HW as submodules. Learned: Phob 2 has its own on-board RP2040 (no Pico needed), parts come from a donor GCC, schematic shows 3.3 V regulators and spare GPIO12-15 labels. Rail/pad details still unverified. See facts/phobgcc.md.
+
+## 2026-10-09 — Session 2 (cont.): KiCad netlist
+User installed KiCad 10. Ran `"C:\Program Files\KiCad\10.0\bin\kicad-cli.exe" sch export netlist --format kicadsexpr` on the Phob 2.0.0-proto-1 schematic and parsed it with a short Python script. Found header J6 (+3V3, GPIO12-15, GND) and the power path (cable +5V -> AMS1117-3.3 -> +3V3). A first parsing attempt matched nothing because KiCad 10 writes one token per line; fixed the regex. Details in facts/phobgcc.md.
