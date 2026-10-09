@@ -11,3 +11,14 @@
 
 ## Key finding
 Upstream `gcwireless` is an early prototype: the transmitter never sends in its main loop, its payload is placeholder bytes, and the receiver fakes its data. Upstream `gcwireless_bridge` copies only one byte (main stick X). A working link must be written, not just built. Details: [facts/nrf52-radio.md](facts/nrf52-radio.md).
+
+## Next / missing (checklist)
+- [ ] Read PhobGCC-doc: stock-shell fit, spare pins a radio could use, board power supply -> `facts/phobgcc.md`
+- [ ] Research power/battery with citations -> `facts/power.md`
+- [ ] Verify joybus bit timing against a protocol reference -> `facts/joybus.md`
+- [ ] Verify nRF52 radio unknowns (frequency unit, default CRC, SPIM3 enable) against Nordic docs -> `facts/nrf52-radio.md`
+- [ ] Find the real nice!nano board/pin map (or ask Heather in a GitHub issue); then get TX/RX to build
+- [ ] Try the RP2040 bridge build (install Pico SDK, set `PICO_SDK_PATH`)
+- [ ] Decide the PC/USB receiver approach (not in upstream)
+- [ ] Write `PHOB_CHANGES.md` (only if Phob is modified), wiring tables, and a BOM with prices (user approval before ordering)
+- [ ] Grow the FAQ to 10 real questions
