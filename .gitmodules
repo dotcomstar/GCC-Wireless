@@ -1,0 +1,12 @@
+[submodule "upstream/gcwireless"]
+	path = upstream/gcwireless
+	url = https://github.com/heatherspacek/gcwireless
+[submodule "upstream/gcwireless_bridge"]
+	path = upstream/gcwireless_bridge
+	url = https://github.com/heatherspacek/gcwireless_bridge
+[submodule "upstream/Wireless-PhobGCC-nRF24"]
+	path = upstream/Wireless-PhobGCC-nRF24
+	url = https://github.com/heatherspacek/Wireless-PhobGCC-nRF24
+[submodule "upstream/PhobGCC-SW"]
+	path = upstream/PhobGCC-SW
+	url = https://github.com/PhobGCC/PhobGCC-SW
