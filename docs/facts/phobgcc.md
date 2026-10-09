@@ -60,6 +60,6 @@ The RP2040 has 30 usable GPIO pins (GPIO0-29). Netlist assignment (verified 2026
 | | | 28 | console data (joybus) |
 | | | 29 | brake |
 
-So **only 4 GPIOs are free** (12-15), plus 3.3V and GND on J6. J14 and the "SPI" pads are the *stick-ADC bus* (GPIO4/6/7 and the chip-selects); they are in use, though other chips could in principle share a SPI bus (**Unverified**: firmware and timing impact). There is also a 4-pin-class debug set (SWCLK/SWD/RUN) on the RP2040. For a future second project, four pins is the budget unless you share buses or use the USB port.
+So **only 4 GPIOs are free** (12-15), plus 3.3V and GND on J6. J14 and the "SPI" pads are the *stick-ADC bus* (GPIO4/6/7 and the chip-selects); they are in use, though other chips could in principle share a SPI bus (**Unverified**: firmware and timing impact). The RP2040 also has dedicated debug nets (SWCLK, SWD, RUN) that are not GPIOs. For a future second project, four pins is the budget unless you share buses or use the USB port.
 
 Practical use for this project: the nRF52 radio board attaches to J6 via up to four signals (e.g. SPI or UART) plus power; the Phob RP2040 firmware would need changes to talk on those pins (see `PHOB_CHANGES.md`, not yet written).
