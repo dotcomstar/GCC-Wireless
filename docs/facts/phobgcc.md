@@ -7,7 +7,7 @@ Verified 2026-10-09 from `upstream/Wireless-PhobGCC-nRF24/Wireless_Transmitter/i
 - Stick sensing uses external ADCs (analog-to-digital converters) on SPI: clock 6, MOSI 7, MISO 4; chip-selects 24 (A stick) and 23 (C stick). Analog triggers on ADC pins 26 and 27.
 - Pins 0-3 form a small resistor-ladder DAC (digital-to-analog converter).
 
-Not yet researched (do before building): how the board fits a stock shell, which spare pins a radio could use, the board's power supply. Source to read: PhobGCC-doc. **Unverified until read.**
+See the section below for what was read from PhobGCC-doc and the hardware repo.
 
 ## Added 2026-10-09: from PhobGCC-doc and PhobGCCv2-HW
 Sources: `upstream/PhobGCC-doc` @ 23e9192 (2026-08-14), `upstream/PhobGCCv2-HW` @ ff645aa (2023-04-17; board licensed CERN-OHL-S v2, "strongly reciprocal": changes to the board must be published and `CHANGES.txt` updated, per its README).
@@ -17,7 +17,7 @@ Sources: `upstream/PhobGCC-doc` @ 23e9192 (2026-08-14), `upstream/PhobGCCv2-HW` 
 - **Donor controller:** a build reuses parts from a donor stock GCC: 2 stickboxes, 2 trigger potentiometers, cable, rumble bracket, Z switch, optional rumble motor and trigger paddles, plus the shell (`For_Makers/Build_Guide_2.0.md`). The shell and cable are therefore reused, and the Phob board takes the place of the original motherboard. Fit in the shell: the guide warns the Z switch must sit square "or the board may not fit in the controller shell properly" and some solder pads interfere with a rib on the front shell; a USB jack/PhobVision jack are described as tight with the OEM rumble motor.
 - **Board parts** (counted in `PhobGCC_2_0_0_proto_1.kicad_sch`): RP2040, 2x AMS1117-3.3 (3.3 V regulators), nets named `+5V`, `VBUS`, `+3V3`, `GCC_3.3V`, `GCC_DATA`, 2x USB-B-micro symbols, USBLC6-2P6 (USB protection), fuses, 4x DRV5055A3 Hall sensors.
 - **Spare GPIO:** the schematic has net labels `GPIO12`, `GPIO13`, `GPIO14`, `GPIO15` (matches the spare pins 12/13/14 and LED 15 in `Phob2_0.h`). **Unverified:** whether they reach a solder pad or header that is physically reachable on the finished board; open the KiCad file or inspect a real board.
-- **Power:** `GCC_3.3V` and `+5V`/`VBUS` nets exist, and the board is normally powered through the console cable. **Unverified:** which rail feeds the AMS1117 regulators and how much current is spare. Read the schematic in KiCad before deciding how to power a radio.
+- **Power:** `GCC_3.3V` and `+5V`/`VBUS` nets exist, exist. **Unverified:** that the board is powered from the console cable (expected, since `GCC_DATA`/`GCC_3.3V` are named for the cable, but not traced); which rail feeds the AMS1117 regulators and how much current is spare. Read the schematic in KiCad before deciding how to power a radio.
 - **Firmware flashing:** see `For_Users/Phob2_Programming_Guide.md` (not read yet).
 
 ## Still unverified / to read
