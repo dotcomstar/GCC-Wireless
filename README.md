@@ -26,4 +26,4 @@ git clone --recurse-submodules <this repo>
 Write verified facts with a source (file + commit, or URL). Mark anything not checked as **Unverified**. Define every acronym once.
 
 ## How this repo is built
-The planner, worker and evaluator AI agents that work on this repo run from the configuration in https://github.com/Gidntsquia/claude-config/releases/tag/v1.0.0 (release v1.0.0, published 2026-10-09 UTC; the release exists, checked with `gh release view`).
+The planner, worker and evaluator AI agents that work on this repo run from the configuration in https://github.com/Gidntsquia/claude-config/releases/tag/v1.0.0 (release v1.0.0, published 2026-10-08 8:45 PM Eastern; the release exists, checked with `gh release view`).
