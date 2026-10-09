@@ -25,3 +25,6 @@ Newest entries at the bottom. Times are US Eastern.
    Cause: `PIN_0xx` names are not defined by the Adafruit nRF52 core (checked variants list: feather, itsybitsy, metro, pca10056, etc.; none define them). They must come from a nice!nano-specific variant that upstream's author had locally. I could not find it (one web search, GitHub variants listing).
    Status: **TX and RX firmware do not yet build.** Next options: (a) find the nice!nano variant (ask Heather via a GitHub issue on gcwireless), (b) translate PIN_0xx to the P0.xx/P1.xx GPIO numbers via the nRF52840 pin map and add a small header. Option (b) needs the stand-in board's pin map checked; not done.
    Not yet attempted: bridge (`gcwireless_bridge`) build.
+
+## 2026-10-09 — Session 2: docs focus
+User is not ready to build on a board; focus moved to repo setup and research docs. Read all of `gcwireless` src and `gcwireless_bridge` src; wrote `docs/facts/*`, README, STATUS, PROVENANCE, DECISIONS, FAQ. Main finding: upstream is a prototype (TX never sends in loop, RX spoofs data, bridge copies one byte). See STATUS.
