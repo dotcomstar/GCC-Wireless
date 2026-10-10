@@ -27,5 +27,10 @@ Terms: **nRF52** = Nordic Semiconductor's family of 2.4 GHz radio microcontrolle
 ## Why not nRF24
 Upstream author Heather Spacek: "nrf24 series is not recommended for new designs so I started again from scratch with nrf52's" (quoted in the project brief).
 
+## Resolved 2026-10-10
+- `PIN_0xx` naming: `PIN_<port><pin>` = P<port>.<pin> (TinyGo nice!nano table). With a generated header (`build-support/gcwireless/pins.h`) both TX and RX compile. See BUILD_LOG.
+- Reset values (Nordic Product Specification v1.1): FREQUENCY = 2 (2402 MHz), CRCCNF = 0 (CRC disabled). So **with no CRC set up, as upstream does, both ends run with no error check at all.**
+
 ## Open questions
-- Board: `platformio.ini` says `board = nicenano`; PlatformIO ships no such board, and the `PIN_0xx` names are undefined in the Adafruit core. See `docs/BUILD_LOG.md`.
+- The real nice!nano v2 pin-to-GPIO map has only been taken from TinyGo's table, not the official schematic.
+- Channel choice: 2401 MHz is outside Wi-Fi's strongest region only if channel 1 is not in use nearby (Wi-Fi 2.4 GHz channel 1 is centered at 2412 MHz, ~22 MHz wide). Whether 2401 MHz is legal/usable depends on the band-edge rules (2400 MHz is the lower ISM edge); **not researched**. A 2 Mbit signal is ~2 MHz wide, so it sits right at the edge.
