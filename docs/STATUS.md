@@ -5,7 +5,7 @@
 | Repo, upstream pinned | Done |
 | Fact files | First drafts from reading code; power and PhobGCC fit need research |
 | nRF52 TX/RX build | **Blocked**: board `nicenano` and `PIN_0xx` names missing (see BUILD_LOG) |
-| RP2040 bridge build | Not tried (needs Pico SDK; `PICO_SDK_PATH` unset) |
+| RP2040 bridge build | **Compiles** (`bash build-support/build-bridge.sh` -> .uf2; not run on hardware) |
 | Hardware | None owned; user is not ready to build on a board yet |
 | Console test / PC receiver | Not started; PC/USB receiver does not exist upstream |
 
@@ -18,7 +18,7 @@ Upstream `gcwireless` is an early prototype: the transmitter never sends in its 
 - [x] Joybus bit timing cross-checked against two references -> `facts/joybus.md`
 - [x] nRF52 radio unknowns verified (frequency = MHz, CRC off at reset, SPIM3 never enabled) -> `facts/nrf52-radio.md`
 - [~] TX/RX build: done with a generated pin header. Still to do: verify the real nice!nano v2 pin map against the official schematic
-- [ ] Try the RP2040 bridge build (install Pico SDK, set `PICO_SDK_PATH`)
+- [x] RP2040 bridge build works via `build-support/build-bridge.sh`
 - [ ] Decide the PC/USB receiver approach (not in upstream)
 - [ ] Write `PHOB_CHANGES.md` (only if Phob is modified), wiring tables, and a BOM with prices (user approval before ordering)
 - [ ] Grow the FAQ to 10 real questions
