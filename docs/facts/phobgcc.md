@@ -48,13 +48,24 @@ Sources: `For_Users/Phobvision_Guide_Latest.md` (written for firmware 0.29), `Fo
 - Report layout (`gcReport.hpp`): byte 0 bits A,B,X,Y,Start; byte 1 bits D-pad L/R/D/U, Z, R, L; then main stick X,Y, C-stick X,Y, analog L, analog R (8 bytes; modes 0-4 repack the last bytes). Default stick value 127.
 - Build for the RP2040 firmware: Pico SDK, `PICO_SDK_PATH`, CMake in `PhobGCC/rp2040` (its `README.md`; step 7 mentions an include line in `../common/phobGCC.h`).
 
-## AMS1117-3.3 regulator (web search 2026-10-10; manufacturer datasheet NOT read)
-- Secondary sources (DigiKey, LCSC, PartsBox listings) agree: 1 A fixed-3.3 V low-dropout regulator, dropout about 1.3 V maximum at 1 A (less at lower load). They disagree on the maximum input voltage (12 V, 18 V, 30 V), so it depends on the maker; the Phob's schematic does not say which maker.
-- Consequence (derived, **Unverified**): with 5 V in and ~1.3 V dropout the regulator can hold 3.3 V; a battery below about 4.6 V at full load could not. A 3.7 V lithium cell would therefore feed the 3.3 V side directly (e.g. via J6) or a boost converter, not the 5 V input. Needs the real datasheet and a power plan in `facts/power.md`.
-- The DigiKey datasheet PDF is an image with no text layer, so it could not be read automatically.
+## AMS1117-3.3 regulator (two vendor datasheets read as text 2026-10-10)
+"AMS1117" is made by many vendors, and their datasheets differ. The Phob's schematic names only the generic part and points at http://www.advanced-monolithic.com/pdf/ds1117.pdf (not fetched: SSL error). No file in PhobGCC-doc or PhobGCCv2-HW names the maker of the chip actually soldered on assembled boards, so the true limits are **unknown**; plan with the weaker numbers.
+
+| Item | Slkor "AMS1117" (win-source copy) | Yongyutai "AMS1117-3.3" (szlcsc copy) |
+|---|---|---|
+| Max input | 30 V | 20 V absolute; 15 V recommended |
+| Dropout at 1 A | 1.30 V typ, 1.40 V max | 1.15 V typ, 1.25 V max |
+| Current limit | 1 A min | 1.25-1.35 A |
+| Quiescent / min load | 3 mA typ, 10 mA max | 5 mA typ, 10 mA max |
+| Output cap | 10 uF tantalum min (22 uF in ripple test) | 22 uF tantalum in test |
+Sources: the two PDFs fetched from win-source.net (via WebFetch) and https://atta.szlcsc.com/upload/public/pdf/source/20211011/2BB92D449F9C5B64FAC2088525330307.pdf, text extracted with `pdftotext`.
+
+- This explains the 12 / 18 / 30 V disagreement seen earlier in web results: different makers, different numbers.
+- **Quiescent current matters for a battery:** the part itself draws 3-10 mA even at no load, far more than an nRF52 sleeping. It is the Phob's cost, not the radio's.
+- Consequence (derived, still **Unverified** on a real board): at 1 A the part needs input >= 3.3 V + 1.4 V = 4.7 V worst case. Our load is far below 1 A so dropout is smaller, but a 3.7 V lithium cell cannot feed the 5 V input. It would feed the 3.3 V side (e.g. J6) or a boost converter. See `power.md`.
 
 ## Still unverified / to read
-- AMS1117-3.3 datasheet: dropout and current limit (decides battery and J6 loading).
+- Which maker's AMS1117 is on assembled boards (BOM not in the repos).
 - Space inside a stock shell for a nice!nano-size board and battery.
 
 ## Where things are on the board (pictures, 2026-10-09)
