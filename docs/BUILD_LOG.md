@@ -37,3 +37,6 @@ User installed KiCad 10. Ran `"C:\Program Files\KiCad\10.0\bin\kicad-cli.exe" sc
 
 ## 2026-10-09 — Session 2 (cont.): pictures and pin budget
 Asked by the user (visual learner): where is J6, how many pins does Phob expose, which RP2040? Rendered the board with `kicad-cli pcb render --side top|bottom`, annotated with Pillow (`uv run --with pillow`), saved to `docs/img/`. Read J6/J14/J15/J1 and all 57 RP2040 pin nets from the netlist: all 30 GPIOs accounted for, only GPIO12-15 free. Silkscreen on the render reads "PhobGCC 2.0.5". See facts/phobgcc.md.
+
+## Session 3 (2026-10-10)
+- Read PhobGCC-doc: PhobVision guide, programming guide, build guide 2.0, ordering guide 2.0.5, board fixes, board debugging. Findings in `facts/phobgcc.md` (sections "PhobVision" and "Other facts from the maker guides"). Traced J2 in the netlist (2 pads: `/V` and ground).

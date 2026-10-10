@@ -13,7 +13,7 @@
 Upstream `gcwireless` is an early prototype: the transmitter never sends in its main loop, its payload is placeholder bytes, and the receiver fakes its data. Upstream `gcwireless_bridge` copies only one byte (main stick X). A working link must be written, not just built. Details: [facts/nrf52-radio.md](facts/nrf52-radio.md).
 
 ## Next / missing (checklist)
-- [~] Phob facts mostly done (see facts/phobgcc.md): power path and spare header J6 verified from netlist. Remaining: AMS1117 datasheet, programming guide, v2.0.5 vs schematic check, shell-fit measurement
+- [~] Phob facts mostly done (see facts/phobgcc.md): power path and spare header J6 verified from netlist. Programming guide, PhobVision and maker guides read 2026-10-10. Remaining: AMS1117 datasheet, v2.0.5 vs schematic check, shell-fit measurement
 - [ ] Research power/battery with citations -> `facts/power.md`
 - [ ] Verify joybus bit timing against a protocol reference -> `facts/joybus.md`
 - [ ] Verify nRF52 radio unknowns (frequency unit, default CRC, SPIM3 enable) against Nordic docs -> `facts/nrf52-radio.md`
