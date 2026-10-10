@@ -30,7 +30,7 @@ Sources: `For_Users/Phobvision_Guide_Latest.md` (written for firmware 0.29), `Fo
 - **What:** an optional v2-only feature. The controller draws a menu on a TV as composite video (old analog video, one yellow RCA plug) for calibration, settings, an input viewer and stick-map plots. No PC needed.
 - **How to start:** plug a 3.5 mm TRRS-to-RCA cable into the jack (wiring must be Audio Left, Video, Ground, Audio Right), hold Z, then plug the GCC cable into a powered console or adapter. Holding Z at power-up skips the console connection. A stuck Z button therefore stops the controller connecting at all; the debugging guide says to check for non-zero PhobVision voltage.
 - **Hardware:** a panel-mount 3.5 mm TRRS jack in a 7 mm hole drilled in the back shell, a 2-pin JST-PH (2.0 mm) cable, and the **J2** pads (2 through-holes). Jack wiring: black wire to the middle tab, red to the other silver tab. It is tight beside the stock rumble motor; the guide suggests skipping rumble or using a cell-phone motor. Parts are in the ordering guide.
-- **Netlist check:** J2 pin 2 is net `/V` (also on resistor R25) and pin 1 is on the ground net. **Unverified:** that `/V` is the output of the GPIO0-3 resistor ladder; the video signal source was not traced.
+- **Netlist check:** J2 pin 2 is net `/V` (also on resistor R25) and pin 1 is on the ground net. The firmware drives video through the 4-pin resistor-ladder DAC starting at `_pinDac0` (`PhobGCC-SW/PhobGCC/rp2040/src/main.cpp:882` calls `videoOut(_pinDac0, ...)`; `cvideo.cpp:189` sets up a PIO state machine on 4 pins). So J2's signal comes from GPIO0-3. **Unverified:** the exact ladder-to-J2 path on the board (net `/V` was not traced past R25).
 - **Relevance to wireless:** (1) J2 is not a spare header. (2) Z-at-boot behavior must be kept in mind when the radio board powers the Phob. (3) The jack needs a back-shell hole, competing for space with a battery.
 
 ## Other facts from the maker guides (2026-10-10)
@@ -40,6 +40,18 @@ Sources: `For_Users/Phobvision_Guide_Latest.md` (written for firmware 0.29), `Fo
 - **Shell fit:** Z switch must stand square; an Omron tactile Z needs trimmed legs and rubber and "a little more force" to seat. Trigger paddles, magnets and mounts add parts but no mention of spare space. No inside-shell dimensions are given anywhere in these docs.
 - **Known issue (v2.0.2):** the L-trigger holes sit too high for a JST header; needs 0.25 mm filed off the trigger guard (`Board_Fixes.md`).
 - **Tools list (build guide):** temperature-controlled iron, flux-core solder, no-clean flux, tri-wing and JIS drivers, tweezers, solder sucker, multimeter, 90% alcohol.
+
+## Firmware boot behavior and clocks (read 2026-10-10, `PhobGCC-SW` @ b4f175e, `rp2040/src/main.cpp:850-870`)
+- On power-up the firmware reads the buttons. **Start held = reboot into the USB drive (BOOTSEL) mode**; **Z held = PhobVision mode** and the chip is overclocked from 125 MHz to **250 MHz** (comment: to ease performance problems).
+- Normal mode keeps 125 MHz. The joybus code (`joybus.cpp`, adapted from pico-rectangle) says its PIO program "expects the system clock to be 125MHz" and uses clock divider 5. This is the same as our bridge's setup, so the bridge needs no clock change.
+- The joybus code builds the controller report inside a callback during the poll; adapters tolerate only a few microseconds of delay (`joybus.cpp` header comment). For us: a wireless input must already be sitting in memory when the console polls, not fetched on demand.
+- Report layout (`gcReport.hpp`): byte 0 bits A,B,X,Y,Start; byte 1 bits D-pad L/R/D/U, Z, R, L; then main stick X,Y, C-stick X,Y, analog L, analog R (8 bytes; modes 0-4 repack the last bytes). Default stick value 127.
+- Build for the RP2040 firmware: Pico SDK, `PICO_SDK_PATH`, CMake in `PhobGCC/rp2040` (its `README.md`; step 7 mentions an include line in `../common/phobGCC.h`).
+
+## AMS1117-3.3 regulator (web search 2026-10-10; manufacturer datasheet NOT read)
+- Secondary sources (DigiKey, LCSC, PartsBox listings) agree: 1 A fixed-3.3 V low-dropout regulator, dropout about 1.3 V maximum at 1 A (less at lower load). They disagree on the maximum input voltage (12 V, 18 V, 30 V), so it depends on the maker; the Phob's schematic does not say which maker.
+- Consequence (derived, **Unverified**): with 5 V in and ~1.3 V dropout the regulator can hold 3.3 V; a battery below about 4.6 V at full load could not. A 3.7 V lithium cell would therefore feed the 3.3 V side directly (e.g. via J6) or a boost converter, not the 5 V input. Needs the real datasheet and a power plan in `facts/power.md`.
+- The DigiKey datasheet PDF is an image with no text layer, so it could not be read automatically.
 
 ## Still unverified / to read
 - AMS1117-3.3 datasheet: dropout and current limit (decides battery and J6 loading).
