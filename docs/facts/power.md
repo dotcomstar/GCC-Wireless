@@ -44,8 +44,17 @@ The CPU and anything else awake add to this. Real figures need a bench measureme
 ## How the Phob is powered (see `phobgcc.md`)
 Phob input is +5 V from the console cable (J1 pin 2), through an AMS1117-3.3 (3-10 mA of its own quiescent current, dropout 1.25-1.4 V at 1 A depending on maker) and a Schottky diode (D1) to the 3.3 V rail. A 3.7 V cell cannot feed that 5 V input. The ways in are: (a) feed the 3.3 V rail through J6 pin 1 (3V3) and be sure the diode D1 blocks backflow into the AMS1117; or (b) a boost converter to 5 V. Neither has been checked on hardware. The RP2040 current draw has not been looked up.
 
+## RP2040 current (RP2040 datasheet, section 5.7, https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf, read 2026-10-10)
+Table 637 (typical / worst-case average, mA). The RP2040 makes its 1.1 V core (DVDD) from 3.3 V with an on-chip linear regulator, so core current is drawn from the 3.3 V supply one-for-one.
+- BOOTSEL mode, USB idle: DVDD 9.0 / 14.3; IOVDD (pin supply) 1.2 / 4.3. About 10 mA typical total.
+- Sleep: DVDD 0.39 / 4.5. Dormant: DVDD 0.18 / 4.2.
+- Popcorn video demo at 48 MHz (heavy IO): DVDD 10.9 / 16.6; IOVDD 24.8 / 35.5.
+- Peripherals add per MHz of system clock (Table 635), e.g. PIO 12.3 uA/MHz per block, IO + pads 23.6, UART 3.5; at 125 MHz a PIO block adds roughly 1.5 mA (arithmetic).
+- Not in the datasheet text I extracted: the Phob's own firmware current. Table 637 text columns were garbled by extraction, so IOVDD/USB cells above were read by layout; recheck against the PDF before relying on them.
+- Consequence (derived): the Phob alone is probably on the order of 10-20 mA at 3.3 V before the radio board; adding a TX at ~7 mA average gives ~20-30 mA, so a 100 mAh cell would last only a few hours. Needs a bench measurement.
+
 ## Still to research
-- RP2040 current at 125 MHz (datasheet), to size the battery.
+- Phob firmware real current (measure; datasheet gives only generic cases).
 - LiPo charging and protection: the nice!nano charger as the only charger vs a separate board.
 - Does a battery fit inside a stock GameCube shell with a Phob (no dimensions in any doc yet).
 - Whether the nRF52 DC/DC needs an inductor on the nice!nano (see Nordic reference design); if not fitted, DC/DC cannot be enabled.
