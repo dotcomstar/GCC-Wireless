@@ -40,3 +40,10 @@ Asked by the user (visual learner): where is J6, how many pins does Phob expose,
 
 ## Session 3 (2026-10-10)
 - Read PhobGCC-doc: PhobVision guide, programming guide, build guide 2.0, ordering guide 2.0.5, board fixes, board debugging. Findings in `facts/phobgcc.md` (sections "PhobVision" and "Other facts from the maker guides"). Traced J2 in the netlist (2 pads: `/V` and ground).
+
+## Session 3 (cont.) — 2026-10-10: TX and RX now compile
+- Found where the `PIN_0xx` names come from: TinyGo's nice!nano page (https://tinygo.org/docs/reference/microcontrollers/boards/nicenano/) labels pins `D<port><2-digit pin>`, e.g. D020 = P0.20, D100 = P1.00. Upstream's `PIN_020` is the same scheme: `PIN_<port><pin>` = nRF52840 port pin P`<port>`.`<pin>`. The Adafruit core's Arduino pin number is `port*32 + pin`.
+- Wrote `build-support/gcwireless/` (own `platformio.ini` + generated `pins.h` defining PIN_000..PIN_031 and PIN_100..PIN_115, force-included). It builds the untouched `upstream/gcwireless/src` with the stand-in board in `build-support/boards/`. Needs `lib_deps` Adafruit SSD1306 + GFX because `rx.h` includes them unconditionally.
+- Result (`cd build-support/gcwireless; pio run`): **both `pro_micro_tx` and `pro_micro_rx` SUCCESS** (flash ~53 KB of 815 KB, RAM 8.8 KB of 248 KB).
+- Limit: this proves the code compiles against the Feather nRF52840 core. It is not run on a nice!nano. The stand-in board's USB IDs and bootloader/flash layout are the Feather's, so do not flash a real nice!nano with it unchecked.
+- Also: read Nordic's nRF52840 Product Specification v1.1 (text extracted with `pdftotext`) for power/radio facts; read two vendor AMS1117 datasheets as text. See `facts/power.md`, `facts/nrf52-radio.md`, `facts/phobgcc.md`.

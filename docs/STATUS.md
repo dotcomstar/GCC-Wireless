@@ -14,10 +14,10 @@ Upstream `gcwireless` is an early prototype: the transmitter never sends in its 
 
 ## Next / missing (checklist)
 - [~] Phob facts mostly done (see facts/phobgcc.md): power path and spare header J6 verified from netlist. Programming guide, PhobVision and maker guides read 2026-10-10. Remaining: AMS1117 datasheet, v2.0.5 vs schematic check, shell-fit measurement
-- [ ] Research power/battery with citations -> `facts/power.md`
-- [ ] Verify joybus bit timing against a protocol reference -> `facts/joybus.md`
-- [ ] Verify nRF52 radio unknowns (frequency unit, default CRC, SPIM3 enable) against Nordic docs -> `facts/nrf52-radio.md`
-- [ ] Find the real nice!nano board/pin map (or ask Heather in a GitHub issue); then get TX/RX to build
+- [x] Radio power/battery numbers from Nordic spec -> `facts/power.md` (shell fit, RP2040 current, charging still open)
+- [x] Joybus bit timing cross-checked against two references -> `facts/joybus.md`
+- [x] nRF52 radio unknowns verified (frequency = MHz, CRC off at reset, SPIM3 never enabled) -> `facts/nrf52-radio.md`
+- [~] TX/RX build: done with a generated pin header. Still to do: verify the real nice!nano v2 pin map against the official schematic
 - [ ] Try the RP2040 bridge build (install Pico SDK, set `PICO_SDK_PATH`)
 - [ ] Decide the PC/USB receiver approach (not in upstream)
 - [ ] Write `PHOB_CHANGES.md` (only if Phob is modified), wiring tables, and a BOM with prices (user approval before ordering)
