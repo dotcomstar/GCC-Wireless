@@ -14,3 +14,8 @@ Derived from GPL-3.0 code.
 
 ## BOM
 Not started. Nothing is ordered without the user's approval.
+
+### Candidate: Phob PCB vendor (2026-10-14, user's lead; not approved, not ordered)
+- Gosre, Etsy shop https://www.etsy.com/shop/Gosre. User says the seller is local (DC/MD/VA). Not verified by me: Etsy returned HTTP 403 to my fetch, so product, price, bare-vs-assembled and shipping are **unknown**. User must read the listing.
+- dol-003.info (https://dol-003.info/) is a GameCube-controller info site with a modder directory; it lists Gosre as a featured modder. Map: https://dol-003.info/modders?map=1; tag filters include "phobs". Profile pages (location, services) not yet read.
+- Open questions for the listing: PCB version (must match docs read so far, Phob 2.0.5), bare board vs populated, donor-controller parts needed, price, shipping.
