@@ -15,6 +15,7 @@ A learner's project to make a GameCube controller wireless, documented so a newc
 | Why we chose this platform | [docs/DECISIONS.md](docs/DECISIONS.md) |
 | Questions asked and answers | [docs/FAQ.md](docs/FAQ.md) |
 | Upstream code, versions, licenses | [docs/PROVENANCE.md](docs/PROVENANCE.md) |
+| Schematics (KiCad 10 project in `hardware/`) | [docs/HARDWARE.md](docs/HARDWARE.md) |
 
 ## Getting the code
 ```

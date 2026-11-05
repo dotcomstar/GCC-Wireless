@@ -20,6 +20,7 @@ Upstream `gcwireless` is an early prototype: the transmitter never sends in its 
 - [~] TX/RX build: done with a generated pin header. Still to do: verify the real nice!nano v2 pin map against the official schematic
 - [x] RP2040 bridge build works via `build-support/build-bridge.sh`
 - [ ] Decide the PC/USB receiver approach (not in upstream)
+- [x] KiCad 10 workspace with Phob, TX, RX and reference sheets: `hardware/`, guide in [HARDWARE.md](HARDWARE.md) (ERC: 0 errors on new sheets; 6 inherited from upstream Phob)
 - [ ] Write `PHOB_CHANGES.md` (only if Phob is modified) and wiring tables
 - [x] BOM: Gosre Deluxe kit ($39.99) ordered by the user 2026-11-05; donor supplies stickboxes/pots
 - [ ] Grow the FAQ to 10 real questions

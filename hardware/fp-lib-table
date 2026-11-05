@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "PhobGCC_2_0_0_footprints")(type "KiCad")(uri "${KIPRJMOD}/phob/PhobGCC_2_0_0_footprints.pretty")(options "")(descr "Footprints from PhobGCCv2-HW ff645aa (CERN-OHL-S v2)"))
+)
