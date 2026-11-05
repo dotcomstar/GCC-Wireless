@@ -22,7 +22,7 @@ Terms: **nRF52** = Nordic Semiconductor's family of 2.4 GHz radio microcontrolle
 
 ## Receiver today
 - Sets up the radio and starts listening, then overwrites its buffer with `0x1B` ("lets spoof some received bytes"). `loop_receiver()` never reads radio events (that block is commented out).
-- Sets SPI-master pins (SCK `PIN_020`, MOSI `PIN_022`, MISO `PIN_024`) on `NRF_SPIM3` and starts a 10-byte transfer each loop. `rx.cpp` lines 72-82 only set pins and the TX buffer. **Verified by reading the file:** it never writes `ENABLE`, never sets the SPI frequency, and never sets an RX buffer. In the nrfx header, the ENABLE value that turns SPIM on is 7 (`SPIM_ENABLE_ENABLE_Enabled`), so the transfer cannot run until that is written. Expect it to do nothing today.
+- Sets SPI controller pins (upstream: master) (SCK `PIN_020`, MOSI `PIN_022`, MISO `PIN_024`) on `NRF_SPIM3` and starts a 10-byte transfer each loop. `rx.cpp` lines 72-82 only set pins and the TX buffer. **Verified by reading the file:** it never writes `ENABLE`, never sets the SPI frequency, and never sets an RX buffer. In the nrfx header, the ENABLE value that turns SPIM on is 7 (`SPIM_ENABLE_ENABLE_Enabled`), so the transfer cannot run until that is written. Expect it to do nothing today.
 
 ## Why not nRF24
 Upstream author Heather Spacek: "nrf24 series is not recommended for new designs so I started again from scratch with nrf52's" (quoted in the project brief).

@@ -44,8 +44,8 @@ Pin names equal the official pinout image (https://nicekeyboards.com/docs/nice-n
 | TX light/test input | P0.17 | `gcwireless/src/tx.cpp:7  pinMode(PIN_017, INPUT_PULLUP);` |
 | TX power-down input | P0.31 | `gcwireless/src/tx.cpp:5  pinMode(PIN_031, INPUT_PULLUP);` |
 | RX SPI SCK | P0.20 | `gcwireless/src/rx.cpp:74  PIN_020, // SCK` |
-| RX SPI MOSI | P0.22 | `rx.cpp:75  PIN_022, // MOSI` |
-| RX SPI MISO | P0.24 | `rx.cpp:76  PIN_024 // MISO` |
+| RX SPI COPI (MOSI) | P0.22 | `rx.cpp:75  PIN_022, // MOSI` |
+| RX SPI CIPO (MISO) | P0.24 | `rx.cpp:76  PIN_024 // MISO` |
 | Battery | BATTERY+ (two pads) | pinout image, no code |
 
 The `PIN_0xx` to port-pin mapping comes from our own stand-in `build-support/gcwireless/pins.h`, not from upstream (upstream's board definition is missing). **Unverified** against a real nice!nano.
@@ -54,8 +54,8 @@ The `PIN_0xx` to port-pin mapping comes from our own stand-in `build-support/gcw
 | Signal | Pico pin | Source line (quoted) |
 |---|---|---|
 | SPI SCK in | GP18 | `gcwireless_bridge/src/main.cpp:88  gpio_set_function(PICO_DEFAULT_SPI_SCK_PIN, GPIO_FUNC_SPI);` (SDK default SPI0 pins: GP16 RX, GP17 CSn, GP18 SCK, GP19 TX, from Pico SDK 2.1.1 `pico.h`) |
-| SPI data in (nRF MOSI) | GP16 | line 87, `PICO_DEFAULT_SPI_RX_PIN` |
-| SPI data out (nRF MISO) | GP19 | line 89, `PICO_DEFAULT_SPI_TX_PIN` |
+| SPI data in (nRF COPI) | GP16 | line 87, `PICO_DEFAULT_SPI_RX_PIN` |
+| SPI data out (nRF CIPO) | GP19 | line 89, `PICO_DEFAULT_SPI_TX_PIN` |
 | SPI CSn | GP17 | line 90, `PICO_DEFAULT_SPI_CSN_PIN` |
 | Joybus data | GP27 | `main.cpp:10  const int _pinTX  = 27;` |
 
@@ -88,7 +88,7 @@ Only GPIO12-15 are free (all 30 RP2040 GPIOs accounted for, BUILD_LOG 2026-10-09
 - **TX has no Phob link upstream.** `tx.cpp @ 576878d` never reads the Phob; the TX sheet leaves the nice!nano side of GPIO12-15 as TBD and does not choose SPI or UART.
 - **The plan said P0.13 / P0.04 appear only in v1.** The v2 pinout image carries a P0.13 cutoff legend, so that is wrong for v2.
 - **`facts/joybus.md` has no GameCube plug pinout.** The pin numbers above come from int03, cited above.
-- **Chip select mismatch.** The bridge slave expects CSn on GP17 but `rx.cpp` has the nRF CSN setup commented out (`PIN_002`, lines 66-71). Drawn as `SPI_CSN_TBD`.
+- **Chip select mismatch.** The bridge (SPI peripheral) expects CSn on GP17 but `rx.cpp` has the nRF CSN setup commented out (`PIN_002`, lines 66-71). Drawn as `SPI_CSN_TBD`.
 - **KiCad 10 splits the Phob 3.3 V rail** into `+3.3V` and `+3V3` when the old file is a sub-sheet (standalone netlist: one net). The TX sheet adds a second global label to rejoin them.
 - **Version naming.** Files are called `2_0_0_proto_1` but are commit ff645aa = tag v2.0.5.
 - **Our `pins.h` is a stand-in**, not upstream's board definition.
@@ -97,3 +97,5 @@ Only GPIO12-15 are free (all 30 RP2040 GPIOs accounted for, BUILD_LOG 2026-10-09
 Phob-to-nice!nano link wiring; which side powers J6 pin 1 (the Phob 3.3 V rail is normally fed by +5V -> AMS1117 -> D1; feeding it from the nice!nano is unverified, see [facts/power.md](facts/power.md)); battery connector; RX power source; nRF CSN pin.
 
 Licences: new sheets GPL-3.0 like this repo; `hardware/phob/` CERN-OHL-S v2.
+
+**SPI terms.** This repo says controller/peripheral and COPI/CIPO (controller out, peripheral in / controller in, peripheral out) instead of master/slave and MOSI/MISO. Quoted upstream code keeps its own words (`MOSI`, `spi_set_slave`).

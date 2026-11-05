@@ -322,7 +322,7 @@ def build_sheets():
            "GP19  SPI0 TX (data out)          src/main.cpp:89  PICO_DEFAULT_SPI_TX_PIN  (pico.h: 19)\n"
            "GP17  SPI0 CSn (chip select)      src/main.cpp:90  PICO_DEFAULT_SPI_CSN_PIN (pico.h: 17)\n"
            "GP25  onboard LED, set high       src/joybus.cpp:100 gpio_put(25, 1)\n"
-           "SPI runs as slave (src/main.cpp:86 spi_set_slave), 1 MHz setting, 10-byte reads (BUF_LEN = 10).\n"
+           "SPI runs as peripheral, old term slave (src/main.cpp:86 spi_set_slave), 1 MHz setting, 10-byte reads (BUF_LEN = 10).\n"
            "Pin numbers on the symbol are GPIO numbers; physical pin numbers were not checked.", 20, 90)
     sheets.append(s)
 
@@ -379,10 +379,10 @@ def build_sheets():
     y_spi = s.pin("U201", "L", 6)[1]
     s.place("RP2040_Pico_Bridge", "U202", "Raspberry Pi Pico (bridge)", 130, 0, align=("R", 6, y_spi))
     s.place("GameCube_Plug", "J201", "GameCube plug", 40, 0, align=("R", 1, s.pin("U202", "L", 4)[1]))
-    # SPI between nano (master) and Pico (slave)
+    # SPI between nano (controller) and Pico (peripheral)
     s.link("U201", "L", 6, "U202", "R", 6, "SPI_SCK")      # P0.20 -> GP18
-    s.link("U201", "L", 7, "U202", "R", 7, "SPI_MOSI")     # P0.22 -> GP16 (Pico RX)
-    s.link("U201", "L", 8, "U202", "R", 8, "SPI_MISO")     # P0.24 <- GP19 (Pico TX)
+    s.link("U201", "L", 7, "U202", "R", 7, "SPI_COPI")     # P0.22 -> GP16 (Pico RX)
+    s.link("U201", "L", 8, "U202", "R", 8, "SPI_CIPO")     # P0.24 <- GP19 (Pico TX)
     s.stub("U202", "R", 9, "SPI_CSN_TBD", 10.16)          # GP17, nRF side not decided in code
     s.link("U201", "L", 3, "U202", "R", 3, "GND")          # GND to GND
     # globals for the rest of GND on nano
@@ -404,10 +404,10 @@ def build_sheets():
            "  nRF52 side: upstream/gcwireless src/rx.cpp @ 576878d lines 72-76: nrf_spim_pins_set(NRF_SPIM3,\n"
            "    PIN_020 /*SCK*/, PIN_022 /*MOSI*/, PIN_024 /*MISO*/). With build-support/gcwireless/pins.h (ours),\n"
            "    PIN_020 = P0.20, PIN_022 = P0.22, PIN_024 = P0.24 (D3, D4, D5 on the official image).\n"
-           "  RP2040 side: upstream/gcwireless_bridge @ 5c31147 src/main.cpp lines 85-90 (slave on the SDK default\n"
+           "  RP2040 side: upstream/gcwireless_bridge @ 5c31147 src/main.cpp lines 85-90 (peripheral; upstream calls it slave, on the SDK default\n"
            "    SPI0 pins: SCK GP18, RX GP16, TX GP19, CSn GP17; values from pico.h in Pico SDK 2.1.1).\n"
-           "  So SCK P0.20 -> GP18, MOSI P0.22 -> GP16 (the Pico's RX), MISO P0.24 <- GP19 (the Pico's TX).\n"
-           "  Direction wording (MOSI/MISO) is our reading of which side is master; the code does not say it outright.\n"
+           "  So SCK P0.20 -> GP18, COPI P0.22 -> GP16 (the Pico's RX), CIPO P0.24 <- GP19 (the Pico's TX).\n"
+           "  Direction wording (COPI = controller out, peripheral in; CIPO = the reverse; older names MOSI/MISO) is our reading of which side is the controller; the code does not say it outright.\n"
            "Joybus DATA: bridge GP27 (src/main.cpp:10) to GameCube plug pin 2 (int03 numbering).\n"
            "TBD: chip select. rx.cpp lines 66-71 has the nRF CSN setup (PIN_002) commented out, so no nRF pin is chosen;\n"
            "  GP17 (CSn) is drawn dangling as SPI_CSN_TBD.\n"

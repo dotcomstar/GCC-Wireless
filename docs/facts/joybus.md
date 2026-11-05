@@ -2,7 +2,7 @@
 
 Source: `upstream/gcwireless_bridge` @ 5c31147 (`src/joybus.cpp`, `pio/joybus.pio`, `include/gcReport.hpp`, `src/main.cpp`), adapted from pico-rectangle (https://github.com/JulienBernard3383279/pico-rectangle). Read 2026-10-09.
 
-**Joybus** = Nintendo's one-wire serial protocol between a console and a controller. The console is the master: it sends a command, the controller answers. One data pin carries both directions.
+**Joybus** = Nintendo's one-wire serial protocol between a console and a controller. The console starts every exchange: it sends a command, the controller answers. One data pin carries both directions.
 
 ## Commands handled (first byte received)
 | Byte | Meaning (per code comments) | Reply |
