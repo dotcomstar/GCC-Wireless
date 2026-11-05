@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/erc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-05T01:22:43",
+    "date": "2026-11-05T01:39:57",
     "ignored_checks": [
         {
             "description": "Global label only appears once in the schematic",
@@ -1940,27 +1940,12 @@
                     "description": "Symbol pin or wire end off connection grid",
                     "items": [
                         {
-                            "description": "Symbol U303 Pin GP27 [GP27_(joybus_DATA), Passive, Line]",
+                            "description": "Symbol J302 Pin 1 [+5V, Passive, Line]",
                             "pos": {
-                                "x": 129.68,
-                                "y": 109.84
+                                "x": 60.16,
+                                "y": 29.76
                             },
-                            "uuid": "c86929f6-14a2-5db0-950d-76bef2644167"
-                        }
-                    ],
-                    "severity": "warning",
-                    "type": "endpoint_off_grid"
-                },
-                {
-                    "description": "Symbol pin or wire end off connection grid",
-                    "items": [
-                        {
-                            "description": "Symbol U301 Pin 1 [GND, Passive, Line]",
-                            "pos": {
-                                "x": 137.3,
-                                "y": 89.52
-                            },
-                            "uuid": "b68c6610-3d85-5398-a704-967c9bb480fd"
+                            "uuid": "66dcdbaa-d34d-582e-962d-76933c392af2"
                         }
                     ],
                     "severity": "warning",
@@ -1972,8 +1957,8 @@
                         {
                             "description": "Symbol J102 Pin 1 [+3V3, Passive, Line]",
                             "pos": {
-                                "x": 93.89,
-                                "y": 129.84
+                                "x": 63.89,
+                                "y": 84.84
                             },
                             "uuid": "1a9c29f2-6d46-5100-9c8e-a46ebff89288"
                         }
@@ -1987,8 +1972,8 @@
                         {
                             "description": "Horizontal Wire, length 22.86 mm",
                             "pos": {
-                                "x": 93.89,
-                                "y": 129.84
+                                "x": 63.89,
+                                "y": 84.84
                             },
                             "uuid": "b52a7e9d-23d7-548e-b4de-fd2db5114f2e"
                         }
@@ -2002,8 +1987,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 93.89,
-                                "y": 134.92
+                                "x": 63.89,
+                                "y": 89.92
                             },
                             "uuid": "d44e0bae-38f0-5a2d-80af-c06a0e9b63b2"
                         }
@@ -2017,8 +2002,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 93.89,
-                                "y": 140.0
+                                "x": 63.89,
+                                "y": 95.0
                             },
                             "uuid": "5baa4b5c-3fbb-52d8-8e34-a1ac369f77cd"
                         }
@@ -2032,8 +2017,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 93.89,
-                                "y": 145.08
+                                "x": 63.89,
+                                "y": 100.08
                             },
                             "uuid": "adc1dbaa-47dd-5f6c-ab45-db2946dcb385"
                         }
@@ -2047,8 +2032,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 93.89,
-                                "y": 150.16
+                                "x": 63.89,
+                                "y": 105.16
                             },
                             "uuid": "370c9ddd-9416-5b94-926a-50ee0fddde68"
                         }
@@ -2062,8 +2047,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 93.89,
-                                "y": 155.24
+                                "x": 63.89,
+                                "y": 110.24
                             },
                             "uuid": "a08b0c7f-56cd-52d9-a162-bedbe96eaae9"
                         }
@@ -2077,8 +2062,8 @@
                         {
                             "description": "Label 'GPIO12'",
                             "pos": {
-                                "x": 104.05,
-                                "y": 134.92
+                                "x": 74.05,
+                                "y": 89.92
                             },
                             "uuid": "40d4bdf3-96e8-53c2-9b2e-dd5a6933dceb"
                         }
@@ -2092,8 +2077,8 @@
                         {
                             "description": "Label 'GPIO13'",
                             "pos": {
-                                "x": 104.05,
-                                "y": 140.0
+                                "x": 74.05,
+                                "y": 95.0
                             },
                             "uuid": "b9a71bc4-f773-58ad-893a-5591be756194"
                         }
@@ -2107,8 +2092,8 @@
                         {
                             "description": "Label 'GPIO14'",
                             "pos": {
-                                "x": 104.05,
-                                "y": 145.08
+                                "x": 74.05,
+                                "y": 100.08
                             },
                             "uuid": "af6907a9-11bc-5043-8547-f78e30dda924"
                         }
@@ -2122,8 +2107,8 @@
                         {
                             "description": "Label 'GPIO15'",
                             "pos": {
-                                "x": 104.05,
-                                "y": 150.16
+                                "x": 74.05,
+                                "y": 105.16
                             },
                             "uuid": "ec367bbb-ec72-5e5a-b1a7-3bce84c44eaa"
                         }
@@ -2137,8 +2122,8 @@
                         {
                             "description": "Label 'LIGHT_IN'",
                             "pos": {
-                                "x": 177.14,
-                                "y": 134.92
+                                "x": 147.14,
+                                "y": 89.92
                             },
                             "uuid": "e5b88691-f173-5ff5-972c-ddb1edb12fb6"
                         }
@@ -2152,8 +2137,8 @@
                         {
                             "description": "Symbol U101 Pin 1 [GND, Passive, Line]",
                             "pos": {
-                                "x": 187.3,
-                                "y": 109.52
+                                "x": 157.3,
+                                "y": 64.52
                             },
                             "uuid": "ac230832-4308-52fb-aff2-533e865d7f75"
                         }
@@ -2167,8 +2152,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 187.3,
-                                "y": 109.52
+                                "x": 157.3,
+                                "y": 64.52
                             },
                             "uuid": "fab49814-4c1f-5992-8177-6897ae597995"
                         }
@@ -2182,8 +2167,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 187.3,
-                                "y": 124.76
+                                "x": 157.3,
+                                "y": 79.76
                             },
                             "uuid": "fa918f77-7009-5f6d-96c8-592ad4cfc100"
                         }
@@ -2197,8 +2182,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 187.3,
-                                "y": 129.84
+                                "x": 157.3,
+                                "y": 84.84
                             },
                             "uuid": "28ab6a9c-b850-5fd6-9a50-585c15ac19db"
                         }
@@ -2212,8 +2197,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 187.3,
-                                "y": 134.92
+                                "x": 157.3,
+                                "y": 89.92
                             },
                             "uuid": "7939e20f-d1f5-5d4b-885a-4e6fc5273eec"
                         }
@@ -2227,8 +2212,8 @@
                         {
                             "description": "Horizontal Wire, length 7.62 mm",
                             "pos": {
-                                "x": 212.7,
-                                "y": 114.6
+                                "x": 182.7,
+                                "y": 69.6
                             },
                             "uuid": "511050b1-5d2f-56c6-b2ae-5d209d4364ca"
                         }
@@ -2242,8 +2227,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 212.7,
-                                "y": 119.68
+                                "x": 182.7,
+                                "y": 74.68
                             },
                             "uuid": "b2906be8-b03d-5573-810b-168f2871032e"
                         }
@@ -2257,8 +2242,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 212.7,
-                                "y": 129.84
+                                "x": 182.7,
+                                "y": 84.84
                             },
                             "uuid": "18e77494-90f6-532d-ac43-ea854068bbe9"
                         }
@@ -2272,8 +2257,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 212.7,
-                                "y": 134.92
+                                "x": 182.7,
+                                "y": 89.92
                             },
                             "uuid": "1c0c1b78-e171-5255-8058-3e6171ccb360"
                         }
@@ -2287,8 +2272,8 @@
                         {
                             "description": "Label 'POWEROFF_IN'",
                             "pos": {
-                                "x": 222.86,
-                                "y": 134.92
+                                "x": 192.86,
+                                "y": 89.92
                             },
                             "uuid": "831ed71a-8541-5747-b9ab-a2fdec0c7a72"
                         }
@@ -2302,8 +2287,8 @@
                         {
                             "description": "Symbol J103 Pin 1 [BAT+, Passive, Line]",
                             "pos": {
-                                "x": 297.38,
-                                "y": 109.52
+                                "x": 247.38,
+                                "y": 64.52
                             },
                             "uuid": "164ab614-3124-592b-8a1f-2b87ebaf859f"
                         }
@@ -2315,10 +2300,10 @@
                     "description": "Symbol pin or wire end off connection grid",
                     "items": [
                         {
-                            "description": "Horizontal Wire, length 84.68 mm",
+                            "description": "Horizontal Wire, length 64.68 mm",
                             "pos": {
-                                "x": 297.38,
-                                "y": 109.52
+                                "x": 247.38,
+                                "y": 64.52
                             },
                             "uuid": "27e6c5f1-8337-5f56-a60f-bcbf5ac0f36f"
                         }
@@ -2332,8 +2317,8 @@
                         {
                             "description": "Horizontal Wire, length 7.62 mm",
                             "pos": {
-                                "x": 297.38,
-                                "y": 119.68
+                                "x": 247.38,
+                                "y": 74.68
                             },
                             "uuid": "5391c6eb-1ce7-5a17-a312-8e5af7b13e62"
                         }
@@ -2345,12 +2330,12 @@
                     "description": "Symbol pin or wire end off connection grid",
                     "items": [
                         {
-                            "description": "Symbol J302 Pin 1 [+5V, Passive, Line]",
+                            "description": "Symbol U303 Pin GP27 [GP27_(joybus_DATA), Passive, Line]",
                             "pos": {
-                                "x": 160.16,
-                                "y": 84.76
+                                "x": 39.68,
+                                "y": 34.84
                             },
-                            "uuid": "66dcdbaa-d34d-582e-962d-76933c392af2"
+                            "uuid": "c86929f6-14a2-5db0-950d-76bef2644167"
                         }
                     ],
                     "severity": "warning",
@@ -2362,8 +2347,8 @@
                         {
                             "description": "Symbol J201 Pin 1 [+5V, Passive, Line]",
                             "pos": {
-                                "x": 95.16,
-                                "y": 124.76
+                                "x": 50.16,
+                                "y": 79.76
                             },
                             "uuid": "2e3c6e14-6ade-55f9-b6ba-96fd2b9fa102"
                         }
@@ -2377,8 +2362,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 95.16,
-                                "y": 124.76
+                                "x": 50.16,
+                                "y": 79.76
                             },
                             "uuid": "e61519dc-02ae-558b-8998-da1d73f3ae36"
                         }
@@ -2390,10 +2375,10 @@
                     "description": "Symbol pin or wire end off connection grid",
                     "items": [
                         {
-                            "description": "Horizontal Wire, length 64.52 mm",
+                            "description": "Horizontal Wire, length 59.52 mm",
                             "pos": {
-                                "x": 95.16,
-                                "y": 129.84
+                                "x": 50.16,
+                                "y": 84.84
                             },
                             "uuid": "bc8ca715-a425-5d09-b36c-d6b6d02d54b9"
                         }
@@ -2407,8 +2392,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 95.16,
-                                "y": 134.92
+                                "x": 50.16,
+                                "y": 89.92
                             },
                             "uuid": "9bb86027-5472-586e-b6fe-4c11495e424d"
                         }
@@ -2422,8 +2407,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 95.16,
-                                "y": 140.0
+                                "x": 50.16,
+                                "y": 95.0
                             },
                             "uuid": "f3f17cd9-a90a-5250-9576-28d760bb3f08"
                         }
@@ -2437,8 +2422,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 95.16,
-                                "y": 150.16
+                                "x": 50.16,
+                                "y": 105.16
                             },
                             "uuid": "9c09c4ff-f4a5-5fd2-b6c0-4456501076ad"
                         }
@@ -2452,8 +2437,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 95.16,
-                                "y": 155.24
+                                "x": 50.16,
+                                "y": 110.24
                             },
                             "uuid": "93da72d0-a735-5be1-a68e-c02281396a7d"
                         }
@@ -2467,8 +2452,8 @@
                         {
                             "description": "Label 'GC_5V_TBD'",
                             "pos": {
-                                "x": 105.32,
-                                "y": 124.76
+                                "x": 60.32,
+                                "y": 79.76
                             },
                             "uuid": "2947cd52-1ae0-5391-9559-966f599fbda4"
                         }
@@ -2482,8 +2467,8 @@
                         {
                             "description": "Label 'GC_3V3_TBD'",
                             "pos": {
-                                "x": 105.32,
-                                "y": 150.16
+                                "x": 60.32,
+                                "y": 105.16
                             },
                             "uuid": "141d871b-4b30-5f7e-84d9-19a67e3d8407"
                         }
@@ -2497,8 +2482,8 @@
                         {
                             "description": "Symbol U202 Pin GP27 [GP27_(joybus_DATA), Passive, Line]",
                             "pos": {
-                                "x": 159.68,
-                                "y": 129.84
+                                "x": 109.68,
+                                "y": 84.84
                             },
                             "uuid": "073472f7-a639-5b10-b783-40ae031f2dca"
                         }
@@ -2512,8 +2497,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 159.68,
-                                "y": 155.24
+                                "x": 109.68,
+                                "y": 110.24
                             },
                             "uuid": "aeb02370-2465-53fa-b583-14469580b970"
                         }
@@ -2527,8 +2512,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 200.32,
-                                "y": 155.24
+                                "x": 150.32,
+                                "y": 110.24
                             },
                             "uuid": "fc151f23-8ddb-5ed4-95d9-f7f0b985e521"
                         }
@@ -2542,8 +2527,8 @@
                         {
                             "description": "Label 'SPI_CSN_TBD'",
                             "pos": {
-                                "x": 210.48,
-                                "y": 155.24
+                                "x": 160.48,
+                                "y": 110.24
                             },
                             "uuid": "ffe7e516-7096-5ebc-a044-e4189ce69dd6"
                         }
@@ -2557,8 +2542,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 257.3,
-                                "y": 109.52
+                                "x": 202.3,
+                                "y": 64.52
                             },
                             "uuid": "2142c0e1-898c-59cb-a080-0a82cc3b7051"
                         }
@@ -2572,8 +2557,8 @@
                         {
                             "description": "Symbol U201 Pin 1 [GND, Passive, Line]",
                             "pos": {
-                                "x": 257.3,
-                                "y": 109.52
+                                "x": 202.3,
+                                "y": 64.52
                             },
                             "uuid": "aaebecf4-8bc5-5d25-9faf-5a07a4cee06a"
                         }
@@ -2585,10 +2570,10 @@
                     "description": "Symbol pin or wire end off connection grid",
                     "items": [
                         {
-                            "description": "Horizontal Wire, length 56.98 mm",
+                            "description": "Horizontal Wire, length 51.98 mm",
                             "pos": {
-                                "x": 257.3,
-                                "y": 124.76
+                                "x": 202.3,
+                                "y": 79.76
                             },
                             "uuid": "28c8977f-13b5-5a62-89fd-2f56677d774a"
                         }
@@ -2602,8 +2587,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 257.3,
-                                "y": 129.84
+                                "x": 202.3,
+                                "y": 84.84
                             },
                             "uuid": "e9dc399d-3d8f-5295-8bcb-7ddc07243003"
                         }
@@ -2615,10 +2600,10 @@
                     "description": "Symbol pin or wire end off connection grid",
                     "items": [
                         {
-                            "description": "Horizontal Wire, length 56.98 mm",
+                            "description": "Horizontal Wire, length 51.98 mm",
                             "pos": {
-                                "x": 257.3,
-                                "y": 140.0
+                                "x": 202.3,
+                                "y": 95.0
                             },
                             "uuid": "01439966-7afb-55e5-9c6e-aeeba3ebae3a"
                         }
@@ -2630,10 +2615,10 @@
                     "description": "Symbol pin or wire end off connection grid",
                     "items": [
                         {
-                            "description": "Horizontal Wire, length 56.98 mm",
+                            "description": "Horizontal Wire, length 51.98 mm",
                             "pos": {
-                                "x": 257.3,
-                                "y": 145.08
+                                "x": 202.3,
+                                "y": 100.08
                             },
                             "uuid": "cc959f09-3d97-5b29-95e3-109b1d70863c"
                         }
@@ -2645,10 +2630,10 @@
                     "description": "Symbol pin or wire end off connection grid",
                     "items": [
                         {
-                            "description": "Horizontal Wire, length 56.98 mm",
+                            "description": "Horizontal Wire, length 51.98 mm",
                             "pos": {
-                                "x": 257.3,
-                                "y": 150.16
+                                "x": 202.3,
+                                "y": 105.16
                             },
                             "uuid": "be239ad9-e113-59b0-8750-18319e3f7471"
                         }
@@ -2662,8 +2647,8 @@
                         {
                             "description": "Horizontal Wire, length 10.16 mm",
                             "pos": {
-                                "x": 282.7,
-                                "y": 119.68
+                                "x": 227.7,
+                                "y": 74.68
                             },
                             "uuid": "9e1214b0-8764-5527-bf8a-6d493837dcf7"
                         }
@@ -2827,8 +2812,8 @@
                         {
                             "description": "Label 'GND'",
                             "pos": {
-                                "x": 224.81,
-                                "y": 124.76
+                                "x": 172.31,
+                                "y": 79.76
                             },
                             "uuid": "2bf533ef-440e-5057-9db8-f1ed7d722a47"
                         }
@@ -3169,18 +3154,18 @@
                         {
                             "description": "Global Label '+3.3V'",
                             "pos": {
-                                "x": 98.97,
-                                "y": 129.84
+                                "x": 68.97,
+                                "y": 84.84
                             },
                             "uuid": "4d34adb3-7a7f-5351-a6d3-d65b405f7dd6"
                         },
                         {
                             "description": "Global Label '+3V3'",
                             "pos": {
-                                "x": 222.86,
-                                "y": 129.84
+                                "x": 86.75,
+                                "y": 84.84
                             },
-                            "uuid": "b1059106-0a71-5e9b-959f-fb7643ef26f3"
+                            "uuid": "0e27e512-0eff-5889-bc17-e21725f8e32f"
                         }
                     ],
                     "severity": "warning",
