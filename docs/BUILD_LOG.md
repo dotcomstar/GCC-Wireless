@@ -51,3 +51,9 @@ Asked by the user (visual learner): where is J6, how many pins does Phob expose,
 
 ## Session 4 (2026-10-14): Phob PCB vendor lead
 User is considering buying a Phob PCB from Etsy shop Gosre (local, DC/MD/VA) and pointed to https://dol-003.info/ for finding local makers. Fetched dol-003.info (works; Gosre is a featured modder, no location given on the home page). Etsy shop page returned 403, so no listing details were read. Recorded as an unapproved candidate in DECISIONS.md. Nothing ordered.
+
+## 2026-11-05: Gosre kit tiers and donor parts
+- User's screenshot of Etsy listing "GCC Phob 2.0.5 Motherboard Kits" (Gosre): $21.99+, ships from Maryland, Blue, tiers Essential $21.99 / Basic $29.99 / Deluxe $39.99; contents from the user's pasted description. Etsy was not fetched (403 before).
+- Decision changed from Basic to Deluxe ($39.99, includes rumble bracket + motor).
+- User asked whether T3 stickboxes or trigger pots are needed, since the donor pots are probably worn. Answer from `Phob2_Ordering_Guide.md` and `Build_Guide_2.0.md`: both come from the donor GCC; Phob does not use stick pots; trigger pots are still read, so test them in PhobScope first. Donor stamp unknown (Smash 4 bundle).
+- Later the same day the user bought the Gosre Deluxe kit, Blue, $39.99. Order number and arrival date not recorded.
