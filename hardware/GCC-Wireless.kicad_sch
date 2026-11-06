@@ -27,7 +27,7 @@
   (property "Sheetname" "Console receiver RX" (at 150 129.3 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
   (property "Sheetfile" "rx_receiver.kicad_sch" (at 150 144.7 0) (effects (font (size 1.27 1.27)) (justify left top)))
   (instances (project "GCC-Wireless" (path "/0ecf63b7-ee30-542c-a8b3-db9ea3f769ca" (page "7")))))
-(text "GCC-Wireless KiCad workspace. Open a sheet: double-click it (or select it, Ctrl+Tab).\nPhobGCC 2.0.5 is an unmodified copy of upstream (see phob/SOURCE.md). The other sheets are ours.\nGuide: docs/HARDWARE.md" (exclude_from_sim no) (at 20 20 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "fb77be8a-7d50-5fe8-b806-85689cb7fba9"))
+(text "GCC-Wireless KiCad workspace. Open a sheet: double-click it (or select it, Ctrl+Tab).\nPhobGCC 2.0.5 is an unmodified copy of upstream (see phob/SOURCE.md). The other sheets are ours.\nGuide: docs/HARDWARE.md" (exclude_from_sim no) (at 20 20 0) (effects (font (size 2.0 2.0)) (justify left top)) (uuid "fb77be8a-7d50-5fe8-b806-85689cb7fba9"))
 (sheet_instances (path "/" (page "1")))
 (embedded_fonts no)
 )

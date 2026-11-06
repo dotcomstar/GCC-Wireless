@@ -1,4 +1,4 @@
-"""Generates the new KiCad files under hardware/ (library, sheets, root, project).
+"""Generates the new KiCad files under hardware/ (library, sheets, root, project).\n
 
 Run from the repo root:  uv run python -I build-support/gen-hardware.py
 The generated files are committed; this script is kept so the drawings can be
@@ -204,7 +204,19 @@ class Sheet:
                 if (side, row) not in used:
                     self.nc(ref, side, row)
 
-    def text(self, s, x, y, size=1.27):
+    def line(self, pts, width=0.2):
+        xy = " ".join(f"(xy {x:.3f} {y:.3f})" for x, y in pts)
+        self.items.append(f'(polyline (pts {xy}) (stroke (width {width}) (type default)) (fill (type none))'
+                          f' (uuid {q(uid(self.file, "l", len(self.items)))}))')
+
+    def text(self, s, x, y, size=1.27, wrap=None):
+        if wrap:
+            import textwrap
+            out = []
+            for ln in s.split("\n"):
+                ind = " " * (len(ln) - len(ln.lstrip()))
+                out += textwrap.wrap(ln, wrap, subsequent_indent=ind + "  ") or [""]
+            s = "\n".join(out)
         self.items.append(f'(text {q(s)} (exclude_from_sim no) (at {x:.3f} {y:.3f} 0)'
                           f' (effects (font (size {size} {size})) (justify left top)) (uuid {q(uid(self.file, "t", len(self.items)))}))')
 
@@ -238,45 +250,65 @@ D_R = ["", "", "", "", "", "D21", "D20", "D19", "D18", "D15", "D14", "D16", "D10
 
 
 def nano_sheet(s):
-    """Front and reverse view of the nice!nano v2 with the labels on the pins, like the official image."""
-    row, top, w = 5.08, 62.0, 22.86
+    """Front and reverse view of the nice!nano v2, laid out like the official image:
+    legend + two warning boxes on top, front with labels on the pins, reverse with only the back pads called out."""
+    row, top, w = 5.08, 80.0, 22.86
+    # ---- legend and warnings (text from the official image)
+    s.rect((12, 16), (74, 58), 0.3)
+    s.label_text("LEGEND", 15, 20, "left", 2.4, True)
+    for i, (name, note) in enumerate([("High Frequency", "blue on image"), ("Low Frequency", "purple"),
+                                      ("Power Pins", "red / grey"), ("Arduino Labels", "green"),
+                                      ("MCU Control", "cyan")]):
+        s.label_text(f"{name} ({note})", 15, 27 + i * 6, "left", 2.0)
+    s.rect((80, 16), (285, 35), 0.3)
+    s.label_text("! Charge Boost", 83, 20, "left", 2.4, True)
+    s.label_text('Bridge this jumper, "BOOST", to increase the max charge rate from 100mA to 500mA.\n'
+                 'Only do this if your battery is larger than 500mAh to avoid explosions, seriously.', 83, 26, "left", 2.0)
+    s.rect((80, 38), (285, 58), 0.3)
+    s.label_text("i External VCC Cutoff", 83, 42, "left", 2.4, True)
+    s.label_text('When P0.13 is set low, it will shut off power to the 3.3V VCC pin. This is useful to\n'
+                 'reduce power usage from components that pull power while idle, such as RGB LEDs.', 83, 48, "left", 2.0)
 
     def board(cx, title, back):
         x0, x1 = cx - w / 2, cx + w / 2
         s.rect((x0, top - 8), (x1, top + 12 * row + 8), 0.5)
         s.rect((cx - 4.5, top - 8), (cx + 4.5, top - 2), 0.3)  # USB-C shell
-        s.label_text("USB-C", cx, top - 5, "center", 1.0)
-        s.label_text(title, cx, top - 13, "center", 2.0, True)
+        s.label_text("USB-C", cx, top - 5, "center", 1.4)
+        s.label_text(title, cx, top - 14, "center", 2.4, True)
         for r in range(13):
             y = top + r * row
             s.circle((x0 + 1.5, y))
             s.circle((x1 - 1.5, y))
-            ln, rn = (NANO_RIGHT[r], NANO_LEFT[r]) if back else (NANO_LEFT[r], NANO_RIGHT[r])
-            s.label_text(ln, x0 - 2, y, "right", 1.5, True)
-            s.label_text(rn, x1 + 2, y, "left", 1.5, True)
             if not back:
+                s.label_text(NANO_LEFT[r], x0 - 2, y, "right", 2.0, True)
+                s.label_text(NANO_RIGHT[r], x1 + 2, y, "left", 2.0, True)
                 if D_L[r]:
-                    s.label_text(D_L[r], x0 - 15, y, "right", 1.5)
+                    s.label_text(D_L[r], x0 - 20, y, "right", 2.0)
                 if D_R[r]:
-                    s.label_text(D_R[r], x1 + 15, y, "left", 1.5)
-    board(60, "FRONT (USB-C at top)", False)
-    board(190, "REVERSE (left-right mirrored)", True)
-    # reverse-only pads, as on the official image (positions approximate)
-    cx = 190
-    s.rect((cx - 1.5, top + 2.5 * row - 1), (cx + 1.5, top + 2.5 * row + 1), 0.2, True)
-    s.label_text("BOOST pads (bridge for 500 mA charge)", cx + 24, top + 2.5 * row, "left", 1.3)
-    for i, name in enumerate(["SWC", "SWD", "P1.01", "P1.02", "P1.07"]):
-        y = top + (8.5 + i * 0.75) * row
-        s.rect((cx + 3, y - 0.8), (cx + 6, y + 0.8), 0.2, True)
-        s.label_text(name, cx + 24, y, "left", 1.3)
-    # legend / notes under the boards
-    ny = top + 12 * row + 20
+                    s.label_text(D_R[r], x1 + 20, y, "left", 2.0)
+    board(70, "FRONT (USB-C at top)", False)
+    board(205, "REVERSE (left-right mirrored)", True)
+    # reverse: pads drawn on the board, names in a column to the right with leader lines (nothing covers a pin)
+    cx = 205
+    xr = cx + w / 2
+    pads = [("BOOST", 2.5, cx, True)] + [(n, 8.0 + i * 1.0, cx + 4 + (i % 2) * 4, False)
+                                          for i, n in enumerate(["SWC", "SWD", "P1.01", "P1.02", "P1.07"])]
+    ly = {"BOOST": top + 2.5 * row}
+    for i, n in enumerate(["SWC", "SWD", "P1.01", "P1.02", "P1.07"]):
+        ly[n] = top + (7.5 + i) * row
+    for name, r, px, wide in pads:
+        py = top + r * row
+        s.rect((px - 1.2, py - 0.9), (px + 1.2, py + 0.9), 0.2, True)
+        lx = xr + 12
+        s.line([(px + 1.2, py), (xr + 4, py), (lx - 2, ly[name]), (lx, ly[name])])
+        s.label_text(name, lx + 1, ly[name], "left", 2.4, True)
+    s.label_text("BOOST: back jumper (see box above)", xr + 12, top + 2.5 * row + 5, "left", 1.6)
+    ny = top + 12 * row + 16
     s.text("Source: https://nicekeyboards.com/docs/nice-nano/pinout-schematic (pinout-v2.png, fetched 2026-11-05).\n"
-           "Pin names and D numbers are copied from that image (Dn = Arduino label). Pin numbers 1-26 are ours.\n"
-           "BATTERY+ appears twice on the front, as on the image. When P0.13 is set low, power to 3.3V is cut off.\n"
-           "Back pads (SWC, SWD, P1.01, P1.02, P1.07, BOOST) are named as on the image; their positions here are approximate.\n"
-           "BOOST: bridging the back jumper raises the charge rate from 100 mA to 500 mA (only for batteries > 500 mAh).",
-           20, ny, 1.27)
+           "Pin names and Dn (Arduino label) copied from that image. Our pin numbers 1-26 are not on the image.\n"
+           "BATTERY+ appears twice on the front, as on the image.\n"
+           "Back pads SWC, SWD, P1.01, P1.02, P1.07, BOOST are named as on the image; pad positions here are approximate.",
+           12, ny, 2.0, wrap=88)
 
 
 def build_sheets():
@@ -291,7 +323,7 @@ def build_sheets():
     # ---- reference: GameCube port
     s = Sheet("ref_gc_port.kicad_sch", "Ref GameCube port pinout", uid("s", "gcport"), 4,
               "Reference only - no wiring.")
-    s.place("GameCube_Plug", "J302", "GameCube plug", 50, 45)
+    s.place("GameCube_Plug", "J302", "GameCube plug", 40, 85)
     s.nc_rest("J302", set())
     s.text("Source: https://www.int03.co.uk/crema/hardware/gamecube/gc-control.html (read 2026-11-05).\n"
            "Pin numbers are that page's own, viewed looking into the console socket (so a plug is the mirror).\n"
@@ -304,13 +336,13 @@ def build_sheets():
            "The page's own caveat: pinout is deduced from multimeter and oscilloscope work, no guarantee.\n"
            "Cross-check: Phob J1 (cable pads) in the Phob sheet = 1 GCC_3.3V, 2 +5V, 3 GCC_DATA, 4-6 GND\n"
            "(docs/facts/phobgcc.md, netlist of PhobGCCv2-HW ff645aa). Same four signals, different numbering.\n"
-           "Bridge data pin: GP27 (upstream/gcwireless_bridge @ 5c31147, src/main.cpp line 10).", 20, 80)
+           "Bridge data pin: GP27 (upstream/gcwireless_bridge @ 5c31147, src/main.cpp line 10).", 95, 45, 2.7, wrap=64)
     sheets.append(s)
 
     # ---- reference: bridge pins
     s = Sheet("ref_rp2040_bridge.kicad_sch", "Ref RP2040 bridge pins", uid("s", "bridge"), 5,
               "Reference only - no wiring.")
-    s.place("RP2040_Pico_Bridge", "U303", "Raspberry Pi Pico (bridge)", 60, 45)
+    s.place("RP2040_Pico_Bridge", "U303", "Raspberry Pi Pico (bridge)", 45, 100)
     s.nc_rest("U303", set())
     s.text("Source: upstream/gcwireless_bridge @ 5c31147 (https://github.com/heatherspacek/gcwireless_bridge).\n"
            "Board: CMakeLists.txt sets no board, so the Pico SDK default (pico) applies; build-support/build-bridge.sh\n"
@@ -323,7 +355,7 @@ def build_sheets():
            "GP17  SPI0 CSn (chip select)      src/main.cpp:90  PICO_DEFAULT_SPI_CSN_PIN (pico.h: 17)\n"
            "GP25  onboard LED, set high       src/joybus.cpp:100 gpio_put(25, 1)\n"
            "SPI runs as peripheral, old term slave (src/main.cpp:86 spi_set_slave), 1 MHz setting, 10-byte reads (BUF_LEN = 10).\n"
-           "Pin numbers on the symbol are GPIO numbers; physical pin numbers were not checked.", 20, 90)
+           "Pin numbers on the symbol are GPIO numbers; physical pin numbers were not checked.", 90, 50, 2.0)
     sheets.append(s)
 
     # ---- TX add-on
@@ -369,7 +401,7 @@ def build_sheets():
            "TBD: power direction on J6 pin 1. The Phob 3.3 V rail is normally fed by +5V -> AMS1117 -> D1\n"
            "(docs/facts/phobgcc.md); feeding +3V3 from the nice!nano 3.3V pin is unverified (docs/facts/power.md).\n"
            "TBD: battery connector type (nice!nano has BATTERY+ pads; pinout page above).\n"
-           "BAT+ goes to both BATTERY+ pins, as the official image shows two.", 15, 15)
+           "BAT+ goes to both BATTERY+ pins, as the official image shows two.", 12, 17, 2.0, wrap=125)
     sheets.append(s)
 
     # ---- RX receiver
@@ -412,7 +444,7 @@ def build_sheets():
            "TBD: chip select. rx.cpp lines 66-71 has the nRF CSN setup (PIN_002) commented out, so no nRF pin is chosen;\n"
            "  GP17 (CSn) is drawn dangling as SPI_CSN_TBD.\n"
            "TBD: how the receiver is powered (GC +5V and 3.43V are labelled only); the code is silent.\n"
-           "Note the bridge currently copies only byte 0 of the SPI data (main.cpp line 104), and reads 10 bytes.", 15, 15)
+           "Note the bridge currently copies only byte 0 of the SPI data (main.cpp line 104), and reads 10 bytes.", 12, 16, 1.9, wrap=135)
     sheets.append(s)
     return sheets
 
@@ -434,7 +466,7 @@ def write_root(sheets):
             f'  (instances (project {q(PROJECT)} (path "/{ROOT_UUID}" (page "{page}")))))')
     items.append('(text "GCC-Wireless KiCad workspace. Open a sheet: double-click it (or select it, Ctrl+Tab).\\n'
                  'PhobGCC 2.0.5 is an unmodified copy of upstream (see phob/SOURCE.md). The other sheets are ours.\\n'
-                 'Guide: docs/HARDWARE.md" (exclude_from_sim no) (at 20 20 0) (effects (font (size 1.27 1.27)) (justify left top))'
+                 'Guide: docs/HARDWARE.md" (exclude_from_sim no) (at 20 20 0) (effects (font (size 2.0 2.0)) (justify left top))'
                  f' (uuid {q(uid("root", "text"))}))')
     (HW / "GCC-Wireless.kicad_sch").write_text(
         f'(kicad_sch (version 20250114) (generator "gen-hardware.py") (generator_version "10.0")\n'
